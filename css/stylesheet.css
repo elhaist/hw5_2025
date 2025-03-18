@@ -1,0 +1,11 @@
+/* Step 7 */
+.card{
+    flex-basis:450px;
+}
+
+/* step 8 */
+.pricing{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
