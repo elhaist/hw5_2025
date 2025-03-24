@@ -1,0 +1,233 @@
+/* Step 1: This animates the logo to grow and ease into view when a user opens or reloads the page. 
+ */
+
+@keyframes logoGrow {
+    from {
+        width: 25px;
+        opacity: 0;
+    }
+    to {
+        width: 475px;
+        opacity: 1;
+    }
+}
+
+#logo {
+    width: 25px;
+    opacity: 0;
+    animation: logoGrow 5s forwards;
+}
+
+/* Step 2: This changes the body font to Poppins, with a backup font of serif. The backgound is also set to an image that has a slight concrete texture. The background color is also white.
+ */
+
+body{
+    font-family: "Poppins", serif;
+    background-image: url("../images/concrete_seamless.png");
+    background-color: #f1f1f1; 
+}
+
+/* Step 3: This sets the header to place logo in the center of the page. */
+
+header{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+/* Step 4: This sets the nav_links to be displayed in a column below the header.*/
+
+.nav_links{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Step 5: This styles the links to always be a blue, even if they have been visited.*/
+
+a:link, a:visited {
+    color: blue; 
+    text-decoration: underline; 
+}
+
+/* Step 6: This styles the card elements to be a blue color, have padding, and the proper radius curves on the tops of the cards.*/
+
+.card > header{
+    background: #288088;
+    border: solid 2px #45ADAD;
+    padding: 20px 0;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+}
+
+.card {
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+}
+
+
+/*  Step 7: 
+Edit the css for the card class to match our example. Achieve this by using a flex-property to specify an initial “size” of 450px.  You need to think about this from a “flex” perspective and realize that flex-direction will affect the size of the elements.  You can see that in the mobile view they all have the same width.  */ 
+.card {
+    flex-basis: 450px;
+}
+
+/* Step 8: This ensures the cards wrap below each other when the screen is too small to display them all in a row. */
+
+.pricing {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+/* Step 9: This places a blue border around the images in the gallery class and gives them enough space between each other. */
+
+.gallery img {
+    border: solid 10px #50C7C7;
+    margin: 10px;
+    width: 300px;
+}
+
+/* Step 10: This ensures the images in the gallery class are displayed in a row and centered on the page on mobile view. It also allows them to be be responsive to the screen size.*/
+
+.gallery {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+}
+
+
+
+/* Styling for screen sizes above 900px. */
+
+@media screen and (min-width: 900px) {
+
+/* Step 11: This makes the navigation and header img align with each other but on other sides of the navigation. The links are spaced evenly from left to right. */
+
+    header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .nav_links {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+/* Step 12: This allows the cards to be aligned by their center, instead of by their tops or bottoms. SInce the second card has a larger height, it places shows it somewhat higher than the other cards.
+ */
+
+    .pricing {
+        display: flex;
+        justify-content: center; 
+        flex-wrap: wrap; 
+        align-items: center;
+    }
+      
+    .card {
+        display: flex;
+        flex: 0 1 275px; 
+        flex-direction: column;
+    }
+
+/* Step 13: *This ensures the header stays fixed to the top while scrolling. */
+    
+    header:not(main header) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    main {
+        padding-top: 100px;
+    }
+
+}
+
+/* Step 14: This ensures the logo is not animated for those who prefer reduced motion. It helps promote accessibility. */
+
+@media screen and (prefers-reduced-motion: reduce) {
+    .logo {
+        animation: none;
+    }
+}
+
+
+/* The following code is for when the page is printed in portrait mode. */
+
+/* Step 15 & 16: This changes the font to Arial with Helevetica as a backup font. It also removes the background image for print view.*/
+
+@media print {
+    body {
+        font-family: Arial, Helvetica;
+        background-image: none;
+        margin: 0;
+        padding: 0;
+    }
+   
+
+/* Step 17: This places the nav links below the header and spaces them across the navigation bar. */
+
+    header{
+        background-image: none;
+        display: block;
+    }
+
+    header img {
+        display: block;
+        margin: 0 auto;
+    }
+
+    nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly; 
+    }
+
+    nav ul.nav_links {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0;
+    }
+
+/* Step 18: This aligns the "buy buttons" with prices across the cards. */
+    .pricing {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: 0;
+    }
+
+/* Step 19: This adds a slight border to the cards and ensures the cards are aligned on the printed page. The cards should be in a row. I had trouble with this portion as I was not sure which type of page I should be printing on. */
+
+    .card {
+        flex-basis: 325px;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        border: solid 2px #45ADDD;
+    }
+
+/* Step 20: This removes the gallery from the printed page. */
+    .gallery {
+        display: none;
+    }
+
+/* Step 21: This adds a thumbs up emoji to the second list item in the card. */
+
+    .card ul li:nth-child(2)::after {
+        content: "\1F44D";
+        font-size: 2em;
+        margin-right: 5px;
+    }
+}
